@@ -6,9 +6,6 @@ var router = express.Router();
 const Task = require("../models/Task");
 const Project = require("../models/Project");
 
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
-});
 //  POST /api/tasks  -  Creates a new task
 router.post("/", (req, res, next) => {
 
@@ -22,6 +19,9 @@ router.post("/", (req, res, next) => {
         {
             new:true
         })
+    })
+    .then((toPopulate) => {
+        return toPopulate.populate('tasks')
     })
     .then(response => res.json(response))
     .catch(err => res.json(err));

@@ -8,6 +8,7 @@ var cors = require('cors')
 var usersRouter = require('./routes/users');
 var projectsRouter = require('./routes/projects');
 var taskRouter = require('./routes/tasks');
+var authRouter = require('./routes/auth')
 
 var app = express();
 
@@ -25,7 +26,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/users', usersRouter);
 app.use('/projects', projectsRouter);
-app.use('/tasks', taskRouter)
+app.use('/tasks', taskRouter);
+app.use('/auth', authRouter);
 
 mongoose
   .connect(process.env.MONGODB_URI)
